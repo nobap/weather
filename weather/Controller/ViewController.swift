@@ -21,7 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - let/var
-    let counRowsForecast = 4
+    let counRowsForecast: Int = 4
+    let timeDaysForecast: String = "12"
     var array: [SimpleDataWeather] = []
 
     //MARK: - lifecycle funcs
@@ -145,7 +146,7 @@ class ViewController: UIViewController {
                 if let date = dateFormatter.date(from: dateString) {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "HH"
-                    if dateFormatter.string(from: date) == "09" {
+                    if dateFormatter.string(from: date) == self.timeDaysForecast {
                         if let icon = elem.weather.first?.main {
                             let iconSystemName = self.iconChanged(icon: icon)
                             self.array.append(SimpleDataWeather(date: date, icon: iconSystemName, temp: elem.main.temp))
