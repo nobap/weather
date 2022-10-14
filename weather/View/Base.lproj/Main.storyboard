@@ -69,28 +69,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="hUS-qw-Lvh">
-                                <rect key="frame" x="63.666666666666657" y="470.33333333333331" width="266" height="45.333333333333314"/>
+                                <rect key="frame" x="56.666666666666657" y="470.33333333333331" width="279.66666666666674" height="45.333333333333314"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mNK-FG-hC4">
-                                        <rect key="frame" x="0.0" y="0.0" width="56.333333333333336" height="45.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="60.666666666666664" height="45.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWP-xj-bAy">
-                                                <rect key="frame" x="0.0" y="0.0" width="56.333333333333336" height="17"/>
-                                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="12"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60.666666666666664" height="17"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="12"/>
                                                 <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="TRm-8A-AEb">
-                                                <rect key="frame" x="0.0" y="25" width="56.333333333333336" height="20.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="25" width="60.666666666666664" height="20.333333333333329"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wind" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1bw-BD-4Qu">
-                                                        <rect key="frame" x="0.0" y="1.3333333333333321" width="21.333333333333332" height="18.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="1.3333333333333304" width="21" height="18"/>
                                                         <color key="tintColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4m/s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Moe-7e-v85">
-                                                        <rect key="frame" x="28.333333333333336" y="0.0" width="28" height="20.333333333333332"/>
-                                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="12"/>
+                                                        <rect key="frame" x="28.000000000000011" y="0.0" width="32.666666666666657" height="20.333333333333332"/>
+                                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="14"/>
                                                         <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -99,25 +99,25 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W8b-q7-akg">
-                                        <rect key="frame" x="101.33333333333334" y="0.0" width="52.666666666666657" height="45.333333333333336"/>
+                                        <rect key="frame" x="105.66666666666669" y="0.0" width="56" height="45.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIr-cC-b2M">
-                                                <rect key="frame" x="0.0" y="0.0" width="52.666666666666664" height="17"/>
-                                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="12"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="56" height="17"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="12"/>
                                                 <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="cmr-WK-zd1">
-                                                <rect key="frame" x="0.0" y="25" width="52.666666666666664" height="20.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="25" width="56" height="20.333333333333329"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="humidity" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="n0l-Bb-pKs">
-                                                        <rect key="frame" x="0.0" y="1.9999999999999982" width="22.666666666666668" height="17.666666666666664"/>
+                                                        <rect key="frame" x="0.0" y="1.9999999999999982" width="22.333333333333332" height="17.666666666666664"/>
                                                         <color key="tintColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="47%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5d-lg-9Mm">
-                                                        <rect key="frame" x="29.666666666666657" y="0.0" width="23" height="20.333333333333332"/>
-                                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="12"/>
+                                                        <rect key="frame" x="29.333333333333314" y="0.0" width="26.666666666666671" height="20.333333333333332"/>
+                                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="14"/>
                                                         <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -126,25 +126,25 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="G9c-vn-8x6">
-                                        <rect key="frame" x="199.00000000000003" y="0.0" width="66.999999999999972" height="45.333333333333336"/>
+                                        <rect key="frame" x="206.66666666666666" y="0.0" width="72.999999999999972" height="45.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pressure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQB-hb-csr">
-                                                <rect key="frame" x="0.0" y="0.0" width="67" height="17"/>
-                                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="12"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="17"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="12"/>
                                                 <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="9nT-py-Rvg">
-                                                <rect key="frame" x="0.0" y="25" width="67" height="20.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="25" width="73" height="20.333333333333329"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barometer" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3RZ-P0-waq">
-                                                        <rect key="frame" x="0.0" y="-3.5527136788005009e-15" width="20.333333333333332" height="20.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.33333333333333215" width="20" height="20"/>
                                                         <color key="tintColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="709hPa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RfZ-aD-5o8">
-                                                        <rect key="frame" x="27.333333333333311" y="0.0" width="39.666666666666657" height="20.333333333333332"/>
-                                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="12"/>
+                                                        <rect key="frame" x="27" y="0.0" width="46" height="20.333333333333332"/>
+                                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="14"/>
                                                         <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -169,8 +169,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tue, Apr 14" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqO-0B-hGO">
-                                                    <rect key="frame" x="40" y="12" width="100" height="21"/>
-                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="15"/>
+                                                    <rect key="frame" x="40" y="13.333333333333334" width="100" height="19.666666666666664"/>
+                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="14"/>
                                                     <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -181,13 +181,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" image="cloud.rain" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ntn-xY-pXA">
-                                                    <rect key="frame" x="201.66666666666666" y="8.6666666666666679" width="30" height="27.666666666666661"/>
+                                                    <rect key="frame" x="201.66666666666666" y="9" width="30" height="27"/>
                                                     <color key="tintColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="Nja-Am-mGd"/>
                                                         <constraint firstAttribute="width" constant="30" id="ddE-PP-exW"/>
                                                     </constraints>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
