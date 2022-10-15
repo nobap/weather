@@ -14,7 +14,7 @@ struct CurrentWeather: Decodable {
     let main: Main
     let visibility: Int?
     let wind: Wind
-    let rain: [String?: Double?]?
+//    let rain: [String?: Double?]?
     let clouds: Clouds?
     let dt: Int
     let sys: Sys
@@ -58,8 +58,8 @@ struct Clouds: Decodable {
 }
 
 struct Sys: Decodable {
-    let type: Int
-    let id: Int
+    let type: Int?
+    let id: Int?
     let country: String
     let sunrise: UInt64?
     let sunset: UInt64?

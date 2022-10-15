@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //MARK: -IBOutlets
+    //MARK: - IBOutlets
     @IBOutlet weak var weatherCity: UILabel!
     @IBOutlet weak var weatherCountry: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -21,14 +21,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - let/var
-    let counRowsForecast: Int = 4
+    let counRowsForecast: Int = 5
+    let rowHeight:CGFloat = 45
     let timeDaysForecast: String = "12"
     var array: [SimpleDataWeather] = []
+    let colorNight = СolorNight()
 
     //MARK: - lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
 //        UserDefaults.standard.removeObject(forKey: "dataCurrentWeather")
 //        UserDefaults.standard.removeObject(forKey: "dataForecastWeather")
 
@@ -38,6 +40,9 @@ class ViewController: UIViewController {
                 guard let descr = json.weather.first?.description,
                       let main = json.weather.first?.main else { return }
                 self.dataChenged(city: json.name, country: json.sys.country, icon: main, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
+
+                Manager.shared.lon = json.coord.lon
+                Manager.shared.lat = json.coord.lat
             } catch {
                 print(error)
             }
@@ -54,11 +59,17 @@ class ViewController: UIViewController {
             }
         }
                 
+        self.colorBGReplacement()
         self.dataCurrentLoaded()
         self.dataForecastLoaded()
     }
     
     //MARK: - funcs
+    func colorBGReplacement() {
+        self.colorNight.colorNightChanged(view: self.tableView, isNight: colorNight.loadNightData())
+        self.colorNight.colorNightChanged(view: self.view, isNight: colorNight.loadNightData())
+    }
+    
     func dataChenged(city: String, country: String, icon: String, temp: Double, descriptoin: String, wind: Double, humidity: Int, pressure: Int) {
         self.weatherCity.text = city
         self.weatherCountry.text = country
@@ -113,7 +124,7 @@ class ViewController: UIViewController {
                       let main = json.weather.first?.main else { return }
                 self?.dataChenged(city: json.name, country: json.sys.country, icon: main, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
 
-                Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { timer in
+                Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { timer in
                     self?.dataCurrentLoaded()
                     timer.invalidate()
                 }
@@ -128,7 +139,7 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                     
-                    Timer.scheduledTimer(withTimeInterval: 120, repeats: true) { timer in
+                    Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { timer in
                         self?.dataForecastLoaded()
                         timer.invalidate()
                     }
@@ -156,25 +167,43 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func settingButtonPresed(_ sender: UIButton) {
+        guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController else { return }
+        controller.delegate = self
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 //MARK: - extensions
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource, SettingViewControllerDelegate {
+    func reqestForecast() {
+        self.dataForecastLoaded()
+    }
+    
+    func requestCurrent() {
+        self.dataCurrentLoaded()
+    }
+    
+    func VCWasClosed() {
+        self.colorBGReplacement()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.counRowsForecast
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as? WeatherTableViewCell else { return UITableViewCell() }
-        
         if self.array.count > 0 {
             cell.configure(with: self.array[indexPath.row])
         }
-        
+        self.colorBGReplacement()
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45
+        return self.rowHeight
     }
 }
