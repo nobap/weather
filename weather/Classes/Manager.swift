@@ -16,6 +16,8 @@ class Manager {
     private let keyAPI = "ed615047034b31320d3eb95c021d4664"
     public var lat: Double = 51.5073219
     public var lon: Double = -0.1276474
+    public var city: String?
+    public var country: String?
 
     //MARK: - inits
     private init() {}
@@ -61,6 +63,10 @@ class Manager {
             if error == nil, let data {
                 do {
                     let json = try JSONDecoder().decode(CurrentWeather.self, from: data)
+
+                    self.city = json.name
+                    self.country = json.sys.country
+
                     UserDefaults.standard.set(data, forKey: "dataCurrentWeather")
                     completion(json)
                 } catch let error {

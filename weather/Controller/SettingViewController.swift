@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol SettingViewControllerDelegate: AnyObject {
     func VCWasClosed()
@@ -13,20 +14,22 @@ protocol SettingViewControllerDelegate: AnyObject {
     func requestCurrent()
 }
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, CLLocationManagerDelegate {
     
     weak var delegate: SettingViewControllerDelegate?
-
+    
     //MARK: - let/var
     let colorNight = СolorNight()
     let rowHeigh:CGFloat = 60
     var array: [CityDataWeather] = []
     var counRowsCity: Int { array.count }
+    let locationManager = CLLocationManager()
     
     //MARK: -IBOutlets
     @IBOutlet weak var cityTableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nightSwitch: UISwitch!
+    @IBOutlet weak var locationSwitch: UISwitch!
     @IBOutlet weak var nameCity: UILabel!
     @IBOutlet weak var nameState: UILabel!
     
@@ -44,7 +47,10 @@ class SettingViewController: UIViewController {
             }
         }
         
+        
+        
         self.nightSwitch.isOn = colorNight.loadNightData()
+        self.locationSwitch.isOn = UserDefaults.standard.value(forKey: "isLocation") as? Bool ?? false
         self.colorBGReplacement(isNight: colorNight.loadNightData())
     }
     
@@ -54,10 +60,57 @@ class SettingViewController: UIViewController {
         self.colorNight.colorNightChanged(view: self.view, isNight: isNight)
     }
     
+    
+    func updateAllDataWeather(lon: Double, lat: Double) {
+        Manager.shared.lon = lon
+        Manager.shared.lat = lat
+        
+        Manager.shared.sendReqestForecast { _ in
+            DispatchQueue.main.async {
+                self.delegate?.reqestForecast()
+            }
+        }
+        Manager.shared.sendRequestCurrentWeather { _ in
+            DispatchQueue.main.async {
+                
+                self.nameCity.text = Manager.shared.city
+                self.nameState.text = Manager.shared.country
+                
+                self.delegate?.requestCurrent()
+            }
+        }
+    }
+    
+    func saveLocationData(isLocation: Bool) {
+        UserDefaults.standard.set(isLocation, forKey: "isLocation")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let coordinate = manager.location?.coordinate else { return }
+        let location: CLLocationCoordinate2D = coordinate
+        print("Locations: \(location.latitude) \(location.longitude)")
+        
+        self.updateAllDataWeather(lon: location.longitude, lat: location.latitude)
+        self.locationManager.stopUpdatingLocation()
+    }
+    
     //MARK: - IBActions
     @IBAction func colorChangePressed(_ sender: UISwitch) {
         self.colorNight.saveNightData(isNight: sender.isOn)
         self.colorBGReplacement(isNight: sender.isOn)
+    }
+    
+    @IBAction func locationReplacement(_ sender: UISwitch) {
+        if sender.isOn {
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            self.locationManager.requestAlwaysAuthorization()
+            self.locationManager.startUpdatingLocation()
+        } else {
+            self.locationManager.stopUpdatingLocation()
+        }
+        
+        saveLocationData(isLocation: sender.isOn)
     }
     
     @IBAction func cityTextRecruit(_ sender: UITextField) {
@@ -105,25 +158,13 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let elem = self.array[indexPath.row]
-
+        
         guard let lon = elem.lon,
               let lat = elem.lat else { return }
         
-        Manager.shared.lon = lon
-        Manager.shared.lat = lat
+        self.updateAllDataWeather(lon: lon, lat: lat)
         
-        Manager.shared.sendReqestForecast { _ in
-            DispatchQueue.main.async {
-                self.delegate?.reqestForecast()
-            }
-        }
-        Manager.shared.sendRequestCurrentWeather { _ in
-            DispatchQueue.main.async {
-                self.delegate?.requestCurrent()
-            }
-        }
-        
-        self.nameCity.text = elem.city
-        self.nameState.text = elem.country
+        self.saveLocationData(isLocation: false)
+        self.locationSwitch.isOn = false
     }
 }

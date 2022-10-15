@@ -286,7 +286,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="h24-Ab-Bye">
-                                <rect key="frame" x="40" y="147" width="313" height="161.66666666666663"/>
+                                <rect key="frame" x="40" y="147" width="313" height="222.66666666666663"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CCS-kQ-YE1">
                                         <rect key="frame" x="0.0" y="0.0" width="313" height="31"/>
@@ -306,8 +306,26 @@
                                             </switch>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mjW-C3-TbA">
+                                        <rect key="frame" x="0.0" y="61" width="313" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0t-0H-NhR">
+                                                <rect key="frame" x="0.0" y="0.0" width="156.66666666666666" height="31"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="14"/>
+                                                <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VmY-Ku-mgR">
+                                                <rect key="frame" x="156.66666666666663" y="0.0" width="158.33333333333337" height="31"/>
+                                                <color key="onTintColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="locationReplacement:" destination="eyO-CQ-h98" eventType="valueChanged" id="vqm-Yb-7GA"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="NF2-Ua-2Tv">
-                                        <rect key="frame" x="0.0" y="61" width="313" height="36.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="122.00000000000001" width="313" height="36.666666666666671"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3k-m0-2QK">
                                                 <rect key="frame" x="0.0" y="0.0" width="156.66666666666666" height="36.666666666666664"/>
@@ -325,7 +343,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykF-ey-rRt">
-                                                        <rect key="frame" x="0.0" y="22.666666666666657" width="156.33333333333334" height="14"/>
+                                                        <rect key="frame" x="0.0" y="22.666666666666686" width="156.33333333333334" height="14"/>
                                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="10"/>
                                                         <color key="textColor" red="0.1843137255" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -335,7 +353,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Eat-64-LMR">
-                                        <rect key="frame" x="0.0" y="127.66666666666669" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="188.66666666666669" width="313" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHh-GA-eT0">
                                                 <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="34"/>
@@ -372,7 +390,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WP2-gf-pvX">
-                                <rect key="frame" x="16" y="328.66666666666674" width="361" height="499.33333333333326"/>
+                                <rect key="frame" x="16" y="389.66666666666674" width="361" height="438.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -462,6 +480,7 @@
                     <connections>
                         <outlet property="backButton" destination="UT6-CB-Rgg" id="icM-OL-bt7"/>
                         <outlet property="cityTableView" destination="WP2-gf-pvX" id="0y0-eQ-Ka0"/>
+                        <outlet property="locationSwitch" destination="VmY-Ku-mgR" id="4XB-gB-e4j"/>
                         <outlet property="nameCity" destination="po7-J6-AVw" id="LG2-F9-6eB"/>
                         <outlet property="nameState" destination="ykF-ey-rRt" id="2q3-0a-5lA"/>
                         <outlet property="nightSwitch" destination="D5M-0J-cDV" id="dK4-CK-zNe"/>
