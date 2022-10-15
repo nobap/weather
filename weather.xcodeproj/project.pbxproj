@@ -76,9 +76,9 @@
 				38C73F1928F852A300CE1D47 /* Classes */,
 				38411C9E28F82CCD00A68D39 /* Services */,
 				38411C9D28F82C8900A68D39 /* Resources */,
-				38411CA028F82CEB00A68D39 /* Controller */,
+				38411CA028F82CEB00A68D39 /* Controllers */,
 				38C73F2328F8A58A00CE1D47 /* Cells */,
-				38411C9F28F82CE200A68D39 /* View */,
+				38411C9F28F82CE200A68D39 /* Views */,
 			);
 			path = weather;
 			sourceTree = "<group>";
@@ -100,22 +100,22 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		38411C9F28F82CE200A68D39 /* View */ = {
+		38411C9F28F82CE200A68D39 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				38411C8F28F82C5200A68D39 /* Main.storyboard */,
 				38411C9428F82C5400A68D39 /* LaunchScreen.storyboard */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		38411CA028F82CEB00A68D39 /* Controller */ = {
+		38411CA028F82CEB00A68D39 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				38411C8D28F82C5200A68D39 /* ViewController.swift */,
 				3851EDFA28F9AE240078B67D /* SettingViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		38C73F1928F852A300CE1D47 /* Classes */ = {

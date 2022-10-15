@@ -14,7 +14,7 @@ protocol SettingViewControllerDelegate: AnyObject {
     func requestCurrent()
 }
 
-class SettingViewController: UIViewController, CLLocationManagerDelegate {
+class SettingViewController: UIViewController {
     
     weak var delegate: SettingViewControllerDelegate?
     
@@ -85,15 +85,6 @@ class SettingViewController: UIViewController, CLLocationManagerDelegate {
         UserDefaults.standard.set(isLocation, forKey: "isLocation")
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let coordinate = manager.location?.coordinate else { return }
-        let location: CLLocationCoordinate2D = coordinate
-        print("Locations: \(location.latitude) \(location.longitude)")
-        
-        self.updateAllDataWeather(lon: location.longitude, lat: location.latitude)
-        self.locationManager.stopUpdatingLocation()
-    }
-    
     //MARK: - IBActions
     @IBAction func colorChangePressed(_ sender: UISwitch) {
         self.colorNight.saveNightData(isNight: sender.isOn)
@@ -106,8 +97,6 @@ class SettingViewController: UIViewController, CLLocationManagerDelegate {
             self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             self.locationManager.requestAlwaysAuthorization()
             self.locationManager.startUpdatingLocation()
-        } else {
-            self.locationManager.stopUpdatingLocation()
         }
         
         saveLocationData(isLocation: sender.isOn)
@@ -135,7 +124,7 @@ class SettingViewController: UIViewController, CLLocationManagerDelegate {
 }
 
 //MARK: - extensions
-extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.counRowsCity
     }
@@ -166,5 +155,13 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         self.saveLocationData(isLocation: false)
         self.locationSwitch.isOn = false
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let coordinate = manager.location?.coordinate else { return }
+        let location: CLLocationCoordinate2D = coordinate
+        
+        self.updateAllDataWeather(lon: location.longitude, lat: location.latitude)
+        self.locationManager.stopUpdatingLocation()
     }
 }
