@@ -23,7 +23,6 @@ class SettingViewController: UIViewController {
     let rowHeigh:CGFloat = 60
     var array: [CityDataWeather] = []
     var counRowsCity: Int { array.count }
-    let locationManager = CLLocationManager()
     
     //MARK: -IBOutlets
     @IBOutlet weak var cityTableView: UITableView!
@@ -47,10 +46,8 @@ class SettingViewController: UIViewController {
             }
         }
         
-        
-        
         self.nightSwitch.isOn = colorNight.loadNightData()
-        self.locationSwitch.isOn = UserDefaults.standard.value(forKey: "isLocation") as? Bool ?? false
+        self.locationSwitch.isOn = LocationManager.shared.locationIsOn
         self.colorBGReplacement(isNight: colorNight.loadNightData())
     }
     
@@ -59,7 +56,6 @@ class SettingViewController: UIViewController {
         self.colorNight.colorNightChanged(view: self.cityTableView, isNight: isNight)
         self.colorNight.colorNightChanged(view: self.view, isNight: isNight)
     }
-    
     
     func updateAllDataWeather(lon: Double, lat: Double) {
         Manager.shared.lon = lon
@@ -81,10 +77,6 @@ class SettingViewController: UIViewController {
         }
     }
     
-    func saveLocationData(isLocation: Bool) {
-        UserDefaults.standard.set(isLocation, forKey: "isLocation")
-    }
-    
     //MARK: - IBActions
     @IBAction func colorChangePressed(_ sender: UISwitch) {
         self.colorNight.saveNightData(isNight: sender.isOn)
@@ -93,13 +85,10 @@ class SettingViewController: UIViewController {
     
     @IBAction func locationReplacement(_ sender: UISwitch) {
         if sender.isOn {
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            self.locationManager.requestAlwaysAuthorization()
-            self.locationManager.startUpdatingLocation()
+            LocationManager.shared.authLocation(for: self)
         }
         
-        saveLocationData(isLocation: sender.isOn)
+        LocationManager.shared.setLocation(isLocation: sender.isOn)
     }
     
     @IBAction func cityTextRecruit(_ sender: UITextField) {
@@ -153,7 +142,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource, CLL
         
         self.updateAllDataWeather(lon: lon, lat: lat)
         
-        self.saveLocationData(isLocation: false)
+        LocationManager.shared.setLocation(isLocation: false)
         self.locationSwitch.isOn = false
     }
     
@@ -162,6 +151,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource, CLL
         let location: CLLocationCoordinate2D = coordinate
         
         self.updateAllDataWeather(lon: location.longitude, lat: location.latitude)
-        self.locationManager.stopUpdatingLocation()
+        LocationManager.shared.stopUpdatingLocation()
     }
 }

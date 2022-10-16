@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38295E8F28FBFED80026BCB6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38295E8E28FBFED80026BCB6 /* LocationManager.swift */; };
 		38411C8A28F82C5200A68D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38411C8928F82C5200A68D39 /* AppDelegate.swift */; };
 		38411C8E28F82C5200A68D39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38411C8D28F82C5200A68D39 /* ViewController.swift */; };
 		38411C9128F82C5200A68D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38411C8F28F82C5200A68D39 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38295E8E28FBFED80026BCB6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		38411C8628F82C5200A68D39 /* weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38411C8928F82C5200A68D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38411C8D28F82C5200A68D39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				3851EDFC28F9F12F0078B67D /* СolorNight.swift */,
 				38C73F1A28F852BB00CE1D47 /* Manager.swift */,
+				38295E8E28FBFED80026BCB6 /* LocationManager.swift */,
 				3851EDFE28FACEF60078B67D /* CityWeather.swift */,
 				38C73F1C28F8572800CE1D47 /* CurrentWeather.swift */,
 				38C73F2428F8AA2400CE1D47 /* ForecastWeather.swift */,
@@ -228,6 +231,7 @@
 				38C73F1F28F8A31200CE1D47 /* StringProtocol+extensions.swift in Sources */,
 				38411C8A28F82C5200A68D39 /* AppDelegate.swift in Sources */,
 				3851EDFF28FACEF60078B67D /* CityWeather.swift in Sources */,
+				38295E8F28FBFED80026BCB6 /* LocationManager.swift in Sources */,
 				3851EE0128FAE1490078B67D /* CityTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
     
@@ -26,28 +27,28 @@ class ViewController: UIViewController {
     let timeDaysForecast: String = "12"
     var array: [SimpleDataWeather] = []
     let colorNight = СolorNight()
-
+    
     //MARK: - lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        UserDefaults.standard.removeObject(forKey: "dataCurrentWeather")
-//        UserDefaults.standard.removeObject(forKey: "dataForecastWeather")
-
+        
+        //        UserDefaults.standard.removeObject(forKey: "dataCurrentWeather")
+        //        UserDefaults.standard.removeObject(forKey: "dataForecastWeather")
+        
         if let dataCurrentWeather = UserDefaults.standard.data(forKey: "dataCurrentWeather") {
             do {
                 let json = try JSONDecoder().decode(CurrentWeather.self, from: dataCurrentWeather)
                 guard let descr = json.weather.first?.description,
                       let main = json.weather.first?.main else { return }
                 self.dataChenged(city: json.name, country: json.sys.country, icon: main, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
-
+                
                 Manager.shared.lon = json.coord.lon
                 Manager.shared.lat = json.coord.lat
             } catch {
                 print(error)
             }
         }
-
+        
         if let dataForecastWeather = UserDefaults.standard.data(forKey: "dataForecastWeather") {
             do {
                 let json = try JSONDecoder().decode(ForecastWeather.self, from: dataForecastWeather)
@@ -58,10 +59,16 @@ class ViewController: UIViewController {
                 print(error)
             }
         }
-                
+        
         self.colorBGReplacement()
-        self.dataCurrentLoaded()
-        self.dataForecastLoaded()
+
+        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { timer in
+            if LocationManager.shared.locationIsOn {
+                LocationManager.shared.authLocation(for: self)
+            }
+            self.dataCurrentLoaded()
+            self.dataForecastLoaded()
+        }.fire()
     }
     
     //MARK: - funcs
@@ -116,33 +123,23 @@ class ViewController: UIViewController {
             return "sun.min"
         }
     }
-
+    
     func dataCurrentLoaded() {
         Manager.shared.sendRequestCurrentWeather { [weak self] json in
             DispatchQueue.main.async {
                 guard let descr = json.weather.first?.description,
                       let main = json.weather.first?.main else { return }
                 self?.dataChenged(city: json.name, country: json.sys.country, icon: main, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
-
-                Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { timer in
-                    self?.dataCurrentLoaded()
-                    timer.invalidate()
-                }
             }
         }
     }
-        
+    
     func dataForecastLoaded() {
         Manager.shared.sendReqestForecast { [weak self] json in
             if let list = json.list as? [List] {
                 self?.dataForecastChenged(for: list)
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
-                    
-                    Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { timer in
-                        self?.dataForecastLoaded()
-                        timer.invalidate()
-                    }
                 }
             }
         }
@@ -153,7 +150,7 @@ class ViewController: UIViewController {
             if let dateString = elem.dt_txt {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
+                
                 if let date = dateFormatter.date(from: dateString) {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "HH"
@@ -176,7 +173,7 @@ class ViewController: UIViewController {
 }
 
 //MARK: - extensions
-extension ViewController: UITableViewDelegate, UITableViewDataSource, SettingViewControllerDelegate {
+extension ViewController: UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, SettingViewControllerDelegate {
     func reqestForecast() {
         self.dataForecastLoaded()
     }
@@ -199,11 +196,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, SettingVie
             cell.configure(with: self.array[indexPath.row])
         }
         self.colorBGReplacement()
-
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.rowHeight
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let coordinate = manager.location?.coordinate else { return }
+        let location: CLLocationCoordinate2D = coordinate
+        
+        Manager.shared.lon = location.longitude
+        Manager.shared.lat = location.latitude
+        LocationManager.shared.stopUpdatingLocation()
     }
 }
