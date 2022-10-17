@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+enum СolorNightKeys: String {
+    case isNight
+}
+
 class СolorNight {
     let bgColorDay = UIColor(red: 226/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0)
     let bgColorNight = UIColor(red: 47/255.0, green: 54/255.0, blue: 67/255.0, alpha: 1.0)
@@ -45,12 +49,11 @@ class СolorNight {
     }
     
     func saveNightData(isNight: Bool) {
-        UserDefaults.standard.set(isNight, forKey: "isNight")
+        UserDefaults.standard.set(isNight, forKey: СolorNightKeys.isNight.rawValue)
     }
     
     func loadNightData() -> Bool {
-        guard let night = UserDefaults.standard.value(forKey: "isNight") as? Bool else { return self.isNight }
-        
+        guard let night = UserDefaults.standard.value(forKey: СolorNightKeys.isNight.rawValue) as? Bool else { return self.isNight }
         return night
     }
     

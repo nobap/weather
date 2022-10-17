@@ -22,20 +22,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - let/var
-    let counRowsForecast: Int = 5
-    let rowHeight:CGFloat = 45
-    let timeDaysForecast: String = "12"
     var array: [SimpleDataWeather] = []
     let colorNight = СolorNight()
+    let rowHeight:CGFloat = 45
+    let counRowsForecast: Int = 5
+    let timeDaysForecast: String = "12"
+    let timeDaysFormatForecast: String = "HH"
+    let dateFormatForecast = "yyyy-MM-dd HH:mm:ss"
+    let weatherTempFormat = "%.0f°"
+    let weatherWindFormat = "%.0fm/s"
+    let weatherHumiditySuffix = "%"
+    let weatherPressureSuffix = "hPa"
     
     //MARK: - lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
+
+//        Manager.shared.removeWeatherData()
         
-        //        UserDefaults.standard.removeObject(forKey: "dataCurrentWeather")
-        //        UserDefaults.standard.removeObject(forKey: "dataForecastWeather")
-        
-        if let dataCurrentWeather = UserDefaults.standard.data(forKey: "dataCurrentWeather") {
+        if let dataCurrentWeather = Manager.shared.loadCurrentWeatherData() {
             do {
                 let json = try JSONDecoder().decode(CurrentWeather.self, from: dataCurrentWeather)
                 guard let descr = json.weather.first?.description,
@@ -49,7 +54,7 @@ class ViewController: UIViewController {
             }
         }
         
-        if let dataForecastWeather = UserDefaults.standard.data(forKey: "dataForecastWeather") {
+        if let dataForecastWeather = Manager.shared.loadForecastWeatherData() {
             do {
                 let json = try JSONDecoder().decode(ForecastWeather.self, from: dataForecastWeather)
                 if let list = json.list as? [List] {
@@ -61,7 +66,7 @@ class ViewController: UIViewController {
         }
         
         self.colorBGReplacement()
-
+        
         Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { timer in
             if LocationManager.shared.locationIsOn {
                 LocationManager.shared.authLocation(for: self)
@@ -81,11 +86,11 @@ class ViewController: UIViewController {
         self.weatherCity.text = city
         self.weatherCountry.text = country
         self.iconChangedImage(icon: icon)
-        self.weatherTemp.text = String(format: "%.0f°", temp)
+        self.weatherTemp.text = String(format: self.weatherTempFormat, temp)
         self.weatherDescription.text = descriptoin.firstCapitalized
-        self.weatherWind.text = String(format: "%.0fm/s", wind)
-        self.weatherHumidity.text = "\(humidity)%"
-        self.weatherPressure.text = "\(pressure)hPa"
+        self.weatherWind.text = String(format: self.weatherWindFormat, wind)
+        self.weatherHumidity.text = "\(humidity)\(self.weatherHumiditySuffix)"
+        self.weatherPressure.text = "\(pressure)\(self.weatherPressureSuffix)"
     }
     
     func iconChangedImage(icon: String) {
@@ -149,11 +154,11 @@ class ViewController: UIViewController {
         for elem in list {
             if let dateString = elem.dt_txt {
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                dateFormatter.dateFormat = self.dateFormatForecast
                 
                 if let date = dateFormatter.date(from: dateString) {
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "HH"
+                    dateFormatter.dateFormat = self.timeDaysFormatForecast
                     if dateFormatter.string(from: date) == self.timeDaysForecast {
                         if let icon = elem.weather.first?.main {
                             let iconSystemName = self.iconChanged(icon: icon)
@@ -165,6 +170,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - IBActions
     @IBAction func settingButtonPresed(_ sender: UIButton) {
         guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController else { return }
         controller.delegate = self

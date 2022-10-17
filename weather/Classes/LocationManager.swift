@@ -8,20 +8,23 @@
 import Foundation
 import CoreLocation
 
+enum LocationKeys: String {
+    case isLocation
+}
+
 class LocationManager {
     
     static let shared = LocationManager()
     
     let locationManager = CLLocationManager()
     var locationIsOn: Bool {
-        UserDefaults.standard.value(forKey: "isLocation") as? Bool ?? false
+        UserDefaults.standard.value(forKey: LocationKeys.isLocation.rawValue) as? Bool ?? false
     }
     
-    //MARK: - inits
     private init() {}
     
     func setLocation(isLocation: Bool) {
-        UserDefaults.standard.set(isLocation, forKey: "isLocation")
+        UserDefaults.standard.set(isLocation, forKey: LocationKeys.isLocation.rawValue)
     }
     
     func authLocation(for object: CLLocationManagerDelegate) {

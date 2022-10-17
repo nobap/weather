@@ -18,12 +18,6 @@ class SettingViewController: UIViewController {
     
     weak var delegate: SettingViewControllerDelegate?
     
-    //MARK: - let/var
-    let colorNight = СolorNight()
-    let rowHeigh:CGFloat = 60
-    var array: [CityDataWeather] = []
-    var counRowsCity: Int { array.count }
-    
     //MARK: -IBOutlets
     @IBOutlet weak var cityTableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
@@ -31,6 +25,12 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var locationSwitch: UISwitch!
     @IBOutlet weak var nameCity: UILabel!
     @IBOutlet weak var nameState: UILabel!
+
+    //MARK: - let/var
+    let colorNight = СolorNight()
+    let rowHeigh:CGFloat = 60
+    var array: [CityDataWeather] = []
+    var counRowsCity: Int { array.count }
     
     //MARK: - lifecycle funcs
     override func viewDidLoad() {
