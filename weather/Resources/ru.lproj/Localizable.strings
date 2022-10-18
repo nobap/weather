@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  weather
+
+  Created by Dmitriy Paranichev on 17.10.2022.
+  
+*/
+
+"hPa" = "гПа";
+"m/s" = "м/с";

@@ -30,22 +30,38 @@ class ViewController: UIViewController {
     let timeDaysFormatForecast: String = "HH"
     let dateFormatForecast = "yyyy-MM-dd HH:mm:ss"
     let weatherTempFormat = "%.0f°"
-    let weatherWindFormat = "%.0fm/s"
+    let weatherWindFormat = "%.0f" + "m/s".localized
     let weatherHumiditySuffix = "%"
-    let weatherPressureSuffix = "hPa"
+    let weatherPressureSuffix = "hPa".localized
     
     //MARK: - lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        Manager.shared.removeWeatherData()
         
+        //        Manager.shared.removeWeatherData()
+        
+        self.mainLoadCurrentWeatherData()
+        self.mainLoadForecastWeatherData()
+        
+        self.colorBGReplacement()
+        
+        Timer.scheduledTimer(withTimeInterval: 180, repeats: true) { timer in
+            if LocationManager.shared.locationIsOn {
+                LocationManager.shared.authLocation(for: self)
+            }
+            self.dataCurrentLoaded()
+            self.dataForecastLoaded()
+        }.fire()
+    }
+    
+    //MARK: - funcs
+    func mainLoadCurrentWeatherData() {
         if let dataCurrentWeather = Manager.shared.loadCurrentWeatherData() {
             do {
                 let json = try JSONDecoder().decode(CurrentWeather.self, from: dataCurrentWeather)
                 guard let descr = json.weather.first?.description,
-                      let main = json.weather.first?.main else { return }
-                self.dataChenged(city: json.name, country: json.sys.country, icon: main, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
+                      let icon = json.weather.first?.icon else { return }
+                self.dataChenged(city: json.name, country: json.sys.country, icon: icon, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
                 
                 Manager.shared.lon = json.coord.lon
                 Manager.shared.lat = json.coord.lat
@@ -53,7 +69,9 @@ class ViewController: UIViewController {
                 print(error)
             }
         }
-        
+    }
+    
+    func mainLoadForecastWeatherData() {
         if let dataForecastWeather = Manager.shared.loadForecastWeatherData() {
             do {
                 let json = try JSONDecoder().decode(ForecastWeather.self, from: dataForecastWeather)
@@ -64,19 +82,8 @@ class ViewController: UIViewController {
                 print(error)
             }
         }
-        
-        self.colorBGReplacement()
-        
-        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { timer in
-            if LocationManager.shared.locationIsOn {
-                LocationManager.shared.authLocation(for: self)
-            }
-            self.dataCurrentLoaded()
-            self.dataForecastLoaded()
-        }.fire()
     }
     
-    //MARK: - funcs
     func colorBGReplacement() {
         self.colorNight.colorNightChanged(view: self.tableView, isNight: colorNight.loadNightData())
         self.colorNight.colorNightChanged(view: self.view, isNight: colorNight.loadNightData())
@@ -100,30 +107,30 @@ class ViewController: UIViewController {
     
     func iconChanged(icon: String) -> String {
         switch icon {
-        case "Clear":
+        case "01d":
             return "sun.min"
-        case "Clouds":
+        case "01n":
+            return "moon.stars"
+        case "02d":
             return "cloud.sun"
-        case "Drizzle":
-            return "cloud.drizzle"
-        case "Rain":
-            return "cloud.rain"
-        case "Thunderstorm":
-            return "cloud.bolt.rain"
-        case "Snow":
-            return "snow"
-        case "Mist":
-            return "cloud.fog"
-        case "Smoke":
+        case "02n":
+            return "cloud.moon"
+        case "03d", "03n":
+            return "cloud"
+        case "04d", "04n":
             return "smoke"
-        case "Haze":
-            return "sun.haze"
-        case "Dust":
-            return "sun.dust"
-        case "Fog", "Sand", "Ash", "Squall":
+        case "09d", "09n":
+            return "cloud.drizzle"
+        case "10d":
+            return "cloud.sun.rain"
+        case "10n":
+            return "cloud.moon.rain"
+        case "11d", "11n":
+            return "cloud.bolt.rain"
+        case "13d", "13n":
+            return "cloud.snow"
+        case "50d", "50n":
             return "cloud.fog"
-        case "Tornado":
-            return "tornado"
         default:
             return "sun.min"
         }
@@ -133,8 +140,8 @@ class ViewController: UIViewController {
         Manager.shared.sendRequestCurrentWeather { [weak self] json in
             DispatchQueue.main.async {
                 guard let descr = json.weather.first?.description,
-                      let main = json.weather.first?.main else { return }
-                self?.dataChenged(city: json.name, country: json.sys.country, icon: main, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
+                      let icon = json.weather.first?.icon else { return }
+                self?.dataChenged(city: json.name, country: json.sys.country, icon: icon, temp: json.main.temp, descriptoin: descr, wind: json.wind.speed, humidity: json.main.humidity, pressure: json.main.pressure)
             }
         }
     }
@@ -151,6 +158,7 @@ class ViewController: UIViewController {
     }
     
     func dataForecastChenged(for list: [List]) {
+        self.array.removeAll()
         for elem in list {
             if let dateString = elem.dt_txt {
                 let dateFormatter = DateFormatter()
@@ -160,7 +168,7 @@ class ViewController: UIViewController {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = self.timeDaysFormatForecast
                     if dateFormatter.string(from: date) == self.timeDaysForecast {
-                        if let icon = elem.weather.first?.main {
+                        if let icon = elem.weather.first?.icon {
                             let iconSystemName = self.iconChanged(icon: icon)
                             self.array.append(SimpleDataWeather(date: date, icon: iconSystemName, temp: elem.main.temp))
                         }
@@ -180,12 +188,13 @@ class ViewController: UIViewController {
 
 //MARK: - extensions
 extension ViewController: UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, SettingViewControllerDelegate {
-    func reqestForecast() {
-        self.dataForecastLoaded()
+    func requestCurrent() {
+        self.mainLoadCurrentWeatherData()
     }
     
-    func requestCurrent() {
-        self.dataCurrentLoaded()
+    func reqestForecast() {
+        self.mainLoadForecastWeatherData()
+        self.tableView.reloadData()
     }
     
     func VCWasClosed() {

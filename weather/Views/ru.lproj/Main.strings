@@ -1,0 +1,72 @@
+
+/* Class = "UILabel"; text = "England"; ObjectID = "7nJ-du-pDs"; */
+"7nJ-du-pDs.text" = "Англия";
+
+/* Class = "UILabel"; text = "GB"; ObjectID = "ASF-95-HXW"; */
+"ASF-95-HXW.text" = "GB";
+
+/* Class = "UILabel"; text = "8°"; ObjectID = "AyV-Tu-10c"; */
+"AyV-Tu-10c.text" = "8°";
+
+/* Class = "UILabel"; text = "GB"; ObjectID = "DVx-xV-CgG"; */
+"DVx-xV-CgG.text" = "GB";
+
+/* Class = "UILabel"; text = "47%"; ObjectID = "J5d-lg-9Mm"; */
+"J5d-lg-9Mm.text" = "47%";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "K4a-iG-1E8"; */
+"K4a-iG-1E8.normalTitle" = "Кнопка";
+
+/* Class = "UILabel"; text = "Change City"; ObjectID = "KHh-GA-eT0"; */
+"KHh-GA-eT0.text" = "Изменить город";
+
+/* Class = "UILabel"; text = "4m/s"; ObjectID = "Moe-7e-v85"; */
+"Moe-7e-v85.text" = "4м/с";
+
+/* Class = "UILabel"; text = "709hPa"; ObjectID = "RfZ-aD-5o8"; */
+"RfZ-aD-5o8.text" = "709гПа";
+
+/* Class = "UILabel"; text = "23°"; ObjectID = "SJf-mh-IQt"; */
+"SJf-mh-IQt.text" = "23°";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UT6-CB-Rgg"; */
+"UT6-CB-Rgg.normalTitle" = "Кнопка";
+
+/* Class = "UILabel"; text = "Mostly cloudy"; ObjectID = "Ubu-Bi-ghp"; */
+"Ubu-Bi-ghp.text" = "В основном облачно";
+
+/* Class = "UILabel"; text = "Wind"; ObjectID = "XWP-xj-bAy"; */
+"XWP-xj-bAy.text" = "Ветер";
+
+/* Class = "UILabel"; text = "Humidity"; ObjectID = "aIr-cC-b2M"; */
+"aIr-cC-b2M.text" = "Влажность";
+
+/* Class = "UILabel"; text = "Night Mode"; ObjectID = "dsa-2M-zK2"; */
+"dsa-2M-zK2.text" = "Ночной режим";
+
+/* Class = "UILabel"; text = "Tue, Apr 14"; ObjectID = "eqO-0B-hGO"; */
+"eqO-0B-hGO.text" = "Вт, Апр 14";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "hJd-cI-4Xz"; */
+"hJd-cI-4Xz.text" = "Настройки";
+
+/* Class = "UILabel"; text = "Selected City"; ObjectID = "i3k-m0-2QK"; */
+"i3k-m0-2QK.text" = "Выбранный город";
+
+/* Class = "UILabel"; text = "Pressure"; ObjectID = "kQB-hb-csr"; */
+"kQB-hb-csr.text" = "Давление";
+
+/* Class = "UILabel"; text = "London"; ObjectID = "po7-J6-AVw"; */
+"po7-J6-AVw.text" = "Лондон";
+
+/* Class = "UILabel"; text = "London"; ObjectID = "qbM-bv-tN9"; */
+"qbM-bv-tN9.text" = "Лондон";
+
+/* Class = "UILabel"; text = "London"; ObjectID = "v36-GF-HOy"; */
+"v36-GF-HOy.text" = "Лондон";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "w0t-0H-NhR"; */
+"w0t-0H-NhR.text" = "Расположение";
+
+/* Class = "UILabel"; text = "GB"; ObjectID = "ykF-ey-rRt"; */
+"ykF-ey-rRt.text" = "GB";

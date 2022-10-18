@@ -29,7 +29,7 @@ class SettingViewController: UIViewController {
     //MARK: - let/var
     let colorNight = СolorNight()
     let rowHeigh:CGFloat = 60
-    var array: [CityDataWeather] = []
+    var array: [CityLocationWeather] = []
     var counRowsCity: Int { array.count }
     
     //MARK: - lifecycle funcs
@@ -66,9 +66,8 @@ class SettingViewController: UIViewController {
                 self.delegate?.reqestForecast()
             }
         }
-        Manager.shared.sendRequestCurrentWeather { _ in
+        Manager.shared.sendRequestCurrentWeather { _p in
             DispatchQueue.main.async {
-                
                 self.nameCity.text = Manager.shared.city
                 self.nameState.text = Manager.shared.country
                 
@@ -97,7 +96,7 @@ class SettingViewController: UIViewController {
             Manager.shared.sendReqestCityLocation(city: text, completion: { [weak self] json in
                 self?.array.removeAll()
                 for elem in json {
-                    self?.array.append(CityDataWeather(city: elem.name, country: elem.country, lon: elem.lon, lat: elem.lat, state: elem.state))
+                    self?.array.append(elem)
                 }
                 DispatchQueue.main.async {
                     self?.cityTableView.reloadData()
@@ -137,10 +136,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource, CLL
         
         let elem = self.array[indexPath.row]
         
-        guard let lon = elem.lon,
-              let lat = elem.lat else { return }
-        
-        self.updateAllDataWeather(lon: lon, lat: lat)
+        self.updateAllDataWeather(lon: elem.lon, lat: elem.lat)
         
         LocationManager.shared.setLocation(isLocation: false)
         self.locationSwitch.isOn = false

@@ -20,6 +20,7 @@ class Manager {
     private let weatherURL = "https://api.openweathermap.org/"
     private let keyAPI = "ed615047034b31320d3eb95c021d4664"
     private let httpMethod = "GET"
+    private let localeCurrent: String = Locale.current.identifier
     public var lat: Double = 51.5073219
     public var lon: Double = -0.1276474
     public var city: String?
@@ -82,7 +83,7 @@ class Manager {
     }
     
     func createURL(call: String) -> URLRequest? {
-        let urlString = "\(self.weatherURL)data/2.5/\(call)?lat=\(self.lat)&lon=\(self.lon)&units=metric&lang=en&appid=\(self.keyAPI)"
+        let urlString = "\(self.weatherURL)data/2.5/\(call)?lat=\(self.lat)&lon=\(self.lon)&units=metric&lang=\(self.localeCurrent)&appid=\(self.keyAPI)"
         guard let url = URL(string: urlString) else { return nil }
         
         var request = URLRequest(url: url)

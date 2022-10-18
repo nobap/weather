@@ -9,7 +9,7 @@ import Foundation
 
 struct CityLocationWeather: Decodable {
     let name: String
-//    let local_names: [String: String]
+    let local_names: [String: String]?
     let lon: Double
     let lat: Double
     let country: String

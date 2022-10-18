@@ -21,7 +21,6 @@ class WeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var temperature: UILabel!
     
     //MARK: - let/var
-    let locale = "en_US_POSIX"
     let dateFormat = "EE, MMM d"
     let tempFormate = "%.0f°"
 
@@ -32,7 +31,6 @@ class WeatherTableViewCell: UITableViewCell {
               let icon = data.icon else { return }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: self.locale)
         dateFormatter.dateFormat = self.dateFormat
         self.date.text = dateFormatter.string(from: date)
         self.temperature.text = String(format: self.tempFormate, temp)
